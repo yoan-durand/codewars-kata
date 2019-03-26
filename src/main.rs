@@ -1,3 +1,6 @@
+mod shortest_word;
+mod same_vectors;
+
 fn xo(string: &'static str) -> bool {
     let char_array = string.chars();
     let mut count_o = 0;
@@ -15,17 +18,8 @@ fn xo(string: &'static str) -> bool {
     return count_x == count_o;
 }
 
-fn comp(a: Vec<i64>, b: Vec<i64>) -> bool {
-    let mut a1 = a.iter().map(|&x| x * x).collect::<Vec<i64>>();
-    let mut b1 = b;
-    a1.sort();
-    b1.sort();
-
-    a1 == b1
-}
-
 fn testing(a: Vec<i64>, b: Vec<i64>, exp: bool) -> () {
-    assert_eq!(comp(a, b), exp)
+    assert_eq!(same_vectors::comp(a, b), exp)
 }
 
 fn main() {
@@ -43,5 +37,11 @@ fn main() {
     let a1 = vec![];
     let a2 = vec![];
     testing(a1, a2, true);
+
+    assert_eq!(shortest_word::find_short("bitcoin take over the world maybe who knows perhaps"), 3);
+    assert_eq!(shortest_word::find_short("turns out random test cases are easier than writing out basic ones"), 3);
+    assert_eq!(shortest_word::find_short("lets talk about javascript the best language"), 3);
+    assert_eq!(shortest_word::find_short("i want to travel the world writing code one day"), 1);
+    assert_eq!(shortest_word::find_short("Lets all go on holiday somewhere very cold"), 2);
 
 }
