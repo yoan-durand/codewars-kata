@@ -16,14 +16,12 @@ fn xo(string: &'static str) -> bool {
 }
 
 fn comp(a: Vec<i64>, b: Vec<i64>) -> bool {
-    let mut res = false;
-    for item in a {
-        let squared = item * item;
-        res = b.iter().position(|&y| y == squared) != None;
+    let mut a1 = a.iter().map(|&x| x * x).collect::<Vec<i64>>();
+    let mut b1 = b;
+    a1.sort();
+    b1.sort();
 
-    }
-
-    res
+    a1 == b1
 }
 
 fn testing(a: Vec<i64>, b: Vec<i64>, exp: bool) -> () {
@@ -39,4 +37,11 @@ fn main() {
     let a1 = vec![121, 144, 19, 161, 19, 144, 19, 11];
     let a2 = vec![11*21, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
     testing(a1, a2, false);
+    let a1 = vec![];
+    let a2 = vec![11*21, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
+    testing(a1, a2, false);
+    let a1 = vec![];
+    let a2 = vec![];
+    testing(a1, a2, true);
+
 }
